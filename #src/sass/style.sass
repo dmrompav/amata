@@ -1,0 +1,325 @@
+@import "_null.sass"
+
+$black: #000
+$white: #f5f6fa
+$grey: #dcdde1
+$dred: #c23616
+$lred: #e84118
+$dblue: #192a56
+$lblue: #273c75
+
+@font-face
+	font-family: Oswald
+	src: url("../fonts/Oswald-Regular.woff2") format("woff2")
+	src: url("../fonts/Oswald-regular.woff") format("woff")
+
+body
+	position: fixed
+
+	width: 100vw
+	height: 100vh
+	overflow: hidden
+
+	// background-color: transparent
+	background-color: $dred
+	background: radial-gradient(circle at center, $dred 0%, #000 100%)
+
+	color: $white
+	font-family: Oswald
+
+canvas
+
+.wrapper 
+	position: fixed
+	top: 0
+	left: 0
+
+	width: 100vw
+	height: 100vh
+	opacity: 1
+
+	perspective: 1000px
+
+	transition: opacity 0.2s
+
+	&-hidden
+		opacity: 0
+
+.menu
+	position: fixed
+
+	width: 100vw
+	height: 100vh
+
+	transition: transform 0.1s, opacity 0.2s
+
+	&__large-button 
+		z-index: 10
+		position: absolute
+		top: 50vh
+		left: 50vw
+		transform: translate(-50%, -50%)
+
+		display: flex
+		flex-direction: row
+		align-items: center
+		justify-content: center
+
+		width: auto
+		padding: 0 15px
+
+		perspective: 400px
+
+		&:hover>.menu__name
+			width: 250px
+		&:hover>.menu__logo
+
+	&__name 
+		width: 0
+		overflow: hidden
+
+		color: rgba(96,36,36,0.7)
+		font-family: sans-serif
+		font-size: 50px
+		font-weight: 900
+		text-transform: uppercase
+		
+		perspective: 400px
+
+		transition: width 0.2s ease
+
+		transform: translateZ(10px)
+
+		&:after
+			content: 'amata'
+			position: absolute
+			z-index: 1
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			color: rgba(156,116,116,0.85)
+			font-family: sans-serif
+			font-size: 50px
+			font-weight: 900
+			text-transform: uppercase
+			transform: translateZ(0px)
+			transition: transform 0.2s ease 0.1s
+		&:before
+			content: 'amata'
+			position: absolute
+			z-index: 2
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			color: rgba(256,256,256,1)
+			background: linear-gradient(to bottom, $white 60%, $grey 65%)
+			background-clip: text
+			-webkit-text-fill-color: transparent
+			font-family: sans-serif
+			font-size: 50px
+			font-weight: 900
+			text-transform: uppercase
+			transform: translateZ(0px)
+			transition: transform 0.1s ease 0.1s
+
+	&__name-opened
+		width: 250px
+		overflow: visible
+
+		&:after
+			transform: translateZ(25px)
+		&:before
+			transform: translateZ(50px)
+
+	&__logo
+		width: 100px
+		height: 100px
+		overflow: visible
+		perspective: 400px
+
+		background-image: url(../img/Crop.png)
+		background-size: 100%
+		background-position: center
+		background-repeat: no-repeat
+
+		display: flex
+		justify-content: center
+		align-items: center
+
+		transform: translateZ(40px)
+
+	&__nav 
+		position: absolute
+		top: 50vh
+		left: 50vw
+
+		width: 300px
+		height: 300px
+		transform: translate(-50%, -50%)
+
+	&__ul
+		display: flex
+		justify-content: center
+		align-items: center
+
+		width: 100%
+		height: 100%
+
+		animation: rotate 10s infinite alternate
+
+		@keyframes rotate
+			0%
+				transform: rotate(0deg)
+			100%
+				transform: rotate(40deg)
+
+	&__li 
+		position: absolute
+		
+		transform: scale(0)
+
+		&_1 
+		&_2 
+		&_3 
+		&_4 
+		&_5 
+		&_6 
+	
+	&__li-opened
+		transform: scale(1)
+
+.selector 
+	&::after
+		content: ''
+		position: absolute
+		z-index: -1
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		border-radius: 50%
+		border: 15px solid rgba($lred, 0.5)
+		border-right: 15px solid rgba($lred, 0)
+		animation: circlerotate 5s infinite linear
+	&::before
+		content: ''
+		position: absolute
+		z-index: -1
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		border-radius: 50%
+		border: 45px solid rgba($dred, 0.5)
+		border-bottom: 45px solid rgba($dred, 0)
+		animation: circlerotate 3s ease infinite alternate-reverse
+
+		@keyframes circlerotate
+			0%
+				transform: rotate(0deg)
+			100%
+				transform: rotate(720deg)
+
+	&__button 
+		position: relative
+
+		top: 0
+
+		opacity: 0
+		width: 200px
+		padding: 15px
+
+		&:hover>.selector__button-name
+			text-shadow: 0 0 10px #fff, 0 0 15px $lred, 0 0 20px $dred
+			font-size: 22px
+		
+		&_1 
+			transition: opacity 0.1s, top 0.1s
+		&_2 
+			transition: opacity 0.1s .08s, top 0.1s .08s
+		&_3 
+			transition: opacity 0.1s .16s, top 0.1s .16s
+		&_4 
+			transition: opacity 0.1s .24s, top 0.1s .24s
+		&_5 
+			transition: opacity 0.1s .32s, top 0.1s .32s
+		&_6 
+			transition: opacity 0.1s .4s, top 0.1s .4s
+		&_8 
+			transition: opacity 0.1s .48s, top 0.1s .48s
+		&_9 
+			transition: opacity 0.1s .56s, top 0.1s .56s
+		&_10 
+			transition: opacity 0.1s .64s, top 0.1s .64s
+		&_11
+			transition: opacity 0.1s .72s, top 0.1s .72s
+		&_12
+			transition: opacity 0.1s .8s, top 0.1s .8s
+		&_13
+			transition: opacity 0.1s .88s, top 0.1s .88s
+
+	&__button-name
+		font-size: 20px
+
+		color: $grey
+		text-transform: uppercase
+		font-weight: 700
+		text-shadow: 0 0 10px #000
+
+		user-select: none
+		cursor: pointer
+
+		transition: text-shadow 0.2s, font-size 0.2s
+		animation: rev-rotate 10s infinite alternate
+
+		@keyframes rev-rotate
+			0%
+				transform: rotate(0deg)
+			100%
+				transform: rotate(-40deg)
+
+.main 
+	position: fixed
+	top: 0
+	left: 0
+
+	width: 100vw
+	height: 100vh
+
+	transform: scale(0)
+
+	transition: transform 0.2s ease
+
+.main-opened
+	transform: scale(1)
+
+.tapfield 
+	position: absolute
+	z-index: 1
+	top: 0
+	left: 0
+
+	width: 100vw
+	height: 100vh
+
+	cursor: pointer
+
+.popup 
+	position: absolute
+	z-index: 2
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+	width: 95vw
+	max-width: 1000px
+	height: auto
+	padding: 30px
+	border-radius: 30px
+	overflow-x: hidden
+	overflow-y: auto
+
+	background-color: rgba(0,0,0,.05)
+
