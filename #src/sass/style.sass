@@ -100,6 +100,7 @@ canvas
 	&__name 
 		z-index: 1
 		width: 0
+		padding: 21px 0
 		overflow: hidden
 
 		color: rgba(96,36,36,0.7)
@@ -120,7 +121,7 @@ canvas
 			content: 'amata'
 			position: absolute
 			z-index: 2
-			top: 0
+			top: 20px
 			left: 0
 			width: 100%
 			height: 100%
@@ -130,13 +131,13 @@ canvas
 			font-size: 50px
 			font-weight: 900
 			text-transform: uppercase
-			transform: translateZ(0px)
+			transform: translateZ(15px)
 			transition: transform 0.2s ease 0.1s
 		&:before
 			content: 'amata'
 			position: absolute
 			z-index: 3
-			top: 0
+			top: 20px
 			left: 0
 			width: 100%
 			height: 100%
@@ -146,7 +147,7 @@ canvas
 			font-size: 50px
 			font-weight: 900
 			text-transform: uppercase
-			transform: translateZ(0px)
+			transform: translateZ(30px)
 			transition: transform 0.1s ease 0.1s
 
 	&__name-opened
@@ -180,7 +181,7 @@ canvas
 		justify-content: center
 		align-items: center
 
-		transform: translateZ(20px)
+		transform: translateZ(10px)
 
 		&:after
 			content: ''
@@ -194,7 +195,7 @@ canvas
 			background-position: center
 			background-repeat: no-repeat
 
-			transform: translateZ(20px)
+			transform: translateZ(15px)
 
 		&:before
 			content: ''
@@ -208,7 +209,7 @@ canvas
 			background-position: center
 			background-repeat: no-repeat
 
-			transform: translateZ(10px)
+			transform: translateZ(30px)
 
 	&__nav 
 		position: absolute
@@ -296,31 +297,31 @@ canvas
 			font-size: 22px
 		
 		&_1 
-			transition: opacity 0.1s, top 0.1s
+			transition: opacity 0.1s, top 0.15s ease-in-out
 		&_2 
-			transition: opacity 0.1s .1s, top 0.1s .1s
+			transition: opacity 0.1s .1s, top 0.15s ease-in-out .1s
 		&_3 
-			transition: opacity 0.1s .2s, top 0.1s .2s
+			transition: opacity 0.1s .2s, top 0.15s ease-in-out .2s
 		&_4 
-			transition: opacity 0.1s .3s, top 0.1s .3s
+			transition: opacity 0.1s .3s, top 0.15s ease-in-out .3s
 		&_5 
-			transition: opacity 0.1s .4s, top 0.1s .4s
+			transition: opacity 0.1s .4s, top 0.15s ease-in-out .4s
 		&_6 
-			transition: opacity 0.1s .5s, top 0.1s .5s
+			transition: opacity 0.1s .5s, top 0.15s ease-in-out .5s
 		&_7 
-			transition: opacity 0.1s .6s, top 0.1s .6s
+			transition: opacity 0.1s .6s, top 0.15s ease-in-out .6s
 		&_8 
-			transition: opacity 0.1s .7s, top 0.1s .7s
+			transition: opacity 0.1s .7s, top 0.1s ease-in-out .7s
 		&_9 
-			transition: opacity 0.1s .8s, top 0.1s .8s
+			transition: opacity 0.1s .8s, top 0.1s ease-in-out .8s
 		&_10 
-			transition: opacity 0.1s .9s, top 0.1s .9s
+			transition: opacity 0.1s .9s, top 0.1s ease-in-out .9s
 		&_11
-			transition: opacity 0.1s 1s, top 0.1s 1s
+			transition: opacity 0.1s 1s, top 0.1s ease-in-out 1s
 		&_12
-			transition: opacity 0.1s 1.1s, top 0.1s 1.1s
+			transition: opacity 0.1s 1.1s, top 0.1s ease-in-out 1.1s
 		&_13
-			transition: opacity 0.1s 1.2s, top 0.1s 1.2s
+			transition: opacity 0.1s 1.2s, top 0.1s ease-in-out 1.2s
 
 	&__button-name
 		font-size: 20px

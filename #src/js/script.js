@@ -216,6 +216,9 @@ document.addEventListener("mousemove", (e) => {
 	menu.style.transform = 'rotateX(' + rotationY + 'deg) rotateY(' + rotationX + 'deg)'
 })
 
+document.querySelector('.hover-field').addEventListener("mouseover", function() {menuName.classList.add("menu__name-opened")})
+document.querySelector('.hover-field').addEventListener("mouseout", function() {menuName.classList.remove("menu__name-opened")})
+
 selBut.forEach(e => e.addEventListener("click", function () {
 	for (let i = 0; i < quantity; i++) {
 		if (this == selBut[i]) {
