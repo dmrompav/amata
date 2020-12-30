@@ -1,33 +1,46 @@
 // -----------------------------------------------------------------
 // ! ============= templates =========================
 // -----------------------------------------------------------------
-const buttons = [
-	'о компании','услуги','технологии','наши проекты','контакты','вакансии'
-]
 const temp = [
-	``,
-	``,
-	``,
-	``,
-	``,
-	``
+	`<h2 class="popup__h2">О компании</h2><p class="popup__p">ООО "Амата" (ИНН: 7801654181) создана в 2018 году. Основной род деятельности - разработка серверных систем на базе Open Source технологий.
+	На текущий момент, главными направлениями являются игровые сервера и веб-разработки. Кроме того, компания создала и владеет бесплатным хостингом фотографий ZiZi Hub. </p>`,
+	
+	
+	`2`,
+	
+	
+	`3`,
+	
+	
+	`4`,
+	
+	
+	`<a href="mailto:info@amatasoftware.com" class="popup__a">info@amatasoftware.com</a>`,
+	
+	
+	`<h2 class="popup__h2">Вакансии</h2><p class="popup__p">На данный момент у нас нет вакансий(</p><p class="popup__p">Если Вы не нашли подходящей вакансии, но считаете, что обладаете должными навыками, то можете отправить свое резюме по адресу:</p><a href="mailto:info@amatasoftware.com" class="popup__a">info@amatasoftware.com</a>`
 ]
-
 
 
 // -----------------------------------------------------------------
 // ! ============= var =========================
 // -----------------------------------------------------------------
-const selBut = document.querySelectorAll(".selector__button"),
-	largeBut = document.querySelector(".menu__large-button"),
-	menuName = document.querySelector(".menu__name"),
-	menuLi = document.querySelectorAll(".menu__li"),
-	wrapper = document.querySelector(".wrapper"),
-	menu = document.querySelector(".menu"),
-	main = document.querySelector(".main"),
-	tapfield = document.querySelector(".tapfield")
+const canvas	= document.querySelector(`canvas`),
+	wrapper		= document.querySelector(".wrapper"),
+	menu		= document.querySelector(".menu"),
+	menuName	= document.querySelector(".menu__name"),
+	menuLi		= document.querySelectorAll(".menu__li"),
 
-const CIRCLE = 250
+	largeBut	= document.querySelector(".menu__large-button"),
+	selBut		= document.querySelectorAll(".selector__button"),
+
+	main		= document.querySelector(".main"),
+	tapfield	= document.querySelector(".tapfield"),
+	popup		= document.querySelector(".popup")
+let close
+
+let CIRCLE																				//радиус меню
+
 
 
 // -----------------------------------------------------------------
@@ -35,41 +48,65 @@ const CIRCLE = 250
 // -----------------------------------------------------------------
 let quantity = selBut.length,															//количество кнопок
 	topButQuantity = (quantity % 2 === 0) ? (quantity / 2) : (quantity / 2 + 1),		//количество верхних кнопок
-	bottomButQuantity = quantity - topButQuantity											//количество нижних кнопок
+	bottomButQuantity = quantity - topButQuantity										//количество нижних кнопок
+//Расположение
 const SelButPosition = () => {
 	//верхних кнопок
 	for (let i = 0; i < topButQuantity; i++) {
 		let rotation = (180 / (topButQuantity) * (i + 0.5) - 90)
 		menuLi[i].style.transform = 'rotateZ(' + (rotation) + 'deg)'
 		selBut[i].style.transform = 'rotateZ(' + -rotation + 'deg)'
-		// selBut[i].addEventListener("click", CallPopUp, false)
 	}
 	//нижних кнопок
 	for (let i = topButQuantity; i < quantity; i++) {
 		let rotation = (180 / (bottomButQuantity) * (i - topButQuantity + 0.5) + 90)
 		menuLi[i].style.transform = 'rotateZ(' + (rotation) + 'deg)'
 		selBut[i].style.transform = 'rotateZ(' + -rotation + 'deg)'
-		// selBut[i].addEventListener("click", CallPopUp, false)
 	}
 }
 SelButPosition();
 
+// *Resizing window ----------------------
+let maxSize, minSize
+
+document.addEventListener("resize", Resize, false)
+function Resize() {
+	if (window.innerWidth < window.innerHeight) {
+		maxSize = window.innerHeight
+		minSize = window.innerWidth
+	} 
+	else {
+		maxSize = window.innerWidth
+		minSize = window.innerHeight
+	}
+	canvas.width	= maxSize
+	canvas.height	= maxSize
+	if (minSize <= 600) {
+		wrapper.classList.add('wrapper-min')
+		CIRCLE = 150
+	}
+	else {
+		wrapper.classList.remove('min')
+		CIRCLE = 220
+	}
+}
+Resize();
 
 // *CANVAS ================================
 (() => {
 	const config = {
+		dotsQuantity: 50,
 		dotMinRad: 2,
 		dotMaxRad: 20,
-		sphereRad: 350,
+		sphereRad: 300,
 		bigDotRad: 35,
 		mouseSize: 120,
 		massFactor: 0.003,
 		firstColor: "rgba(256, 256, 256, 0.1)",
-		secondColor: "rgba(256, 256, 256, 0.6)",
+		secondColor: "rgba(256, 256, 256, 0.4)",
 		smooth: 0.85,
 	}
 	const TWO_PI = 2 * Math.PI;
-	const canvas = document.querySelector(`canvas`);
 	const ctx = canvas.getContext(`2d`);
 	let w, h, mouse, dots;
 	class Dot {
@@ -120,19 +157,15 @@ SelButPosition();
 		return Math.random() * (max - min) + min;
 	}
 	function init() {
-		w = canvas.width = innerWidth;
-		h = canvas.height = innerHeight;
-		document.addEventListener("resize", () => {
-			w = canvas.width = window.innerWidth
-			h = canvas.height = window.innerHeight
-		})
+		w = canvas.width = maxSize;
+		h = canvas.height = maxSize;
 		mouse = { x: w / 2, y: h / 2, down: false }
 		dots = [];
 		dots.push(new Dot(config.bigDotRad));
 	}
 	function loop() {
 		ctx.clearRect(0, 0, w, h);
-		if (dots.length < 40) { dots.push(new Dot()); }
+		if (dots.length < config.dotsQuantity) { dots.push(new Dot()); }
 		updateDots();
 		window.requestAnimationFrame(loop);
 	}
@@ -152,7 +185,6 @@ SelButPosition();
 	// 	config.sphereRad = Math.random() * (950-550) + 550
 	// }, 15001);
 })();
-
 
 
 // -----------------------------------------------------------------
@@ -189,11 +221,21 @@ selBut.forEach(e => e.addEventListener("click", function () {
 		if (this == selBut[i]) {
 			wrapper.classList.add("wrapper-hidden")
 			main.classList.add("main-opened")
+			popup.innerHTML = temp[i]
+			close = document.createElement("div")
+			popup.prepend(close)
+			close.innerHTML = "X"
+			close.classList.add('close')
+			close.addEventListener("click", Close)
 		}
 	}
 }))
 
-tapfield.addEventListener("click", function () {
+tapfield.addEventListener("click", Close)
+
+function Close() {
 	wrapper.classList.remove("wrapper-hidden")
 	main.classList.remove("main-opened")
-})
+	close.removeEventListener("click", Close)
+	close.remove()
+}
