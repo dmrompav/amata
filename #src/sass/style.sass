@@ -13,6 +13,10 @@ $lblue: #273c75
 	src: url("../fonts/Oswald-Regular.woff2") format("woff2")
 	src: url("../fonts/Oswald-regular.woff") format("woff")
 
+*
+	transform-style: preserve-3d
+
+
 body
 	position: fixed
 
@@ -37,6 +41,7 @@ canvas
 	height: 100vh
 	opacity: 1
 
+	perspective-origin: center
 	perspective: 1000px
 
 	transition: opacity 0.2s
@@ -59,6 +64,7 @@ canvas
 	height: 100vh
 
 	transition: transform 0.1s, opacity 0.2s
+	
 
 	&__large-button 
 		z-index: 10
@@ -75,7 +81,10 @@ canvas
 		width: auto
 		padding: 0 15px
 
-		perspective: 400px
+		perspective-origin: center
+		perspective: 1000px
+
+		transform-style: preserve-3d
 
 		@media ( max-width: 600px )
 			&:hover>.menu__name
@@ -89,6 +98,7 @@ canvas
 		&:hover>.menu__logo
 
 	&__name 
+		z-index: 1
 		width: 0
 		overflow: hidden
 
@@ -98,16 +108,18 @@ canvas
 		font-weight: 900
 		text-transform: uppercase
 		
-		perspective: 400px
+		perspective-origin: center
+		perspective: 1000px
 
 		transition: width 0.2s ease
 
 		transform: translateZ(10px)
+		transform-style: preserve-3d
 
 		&:after
 			content: 'amata'
 			position: absolute
-			z-index: 1
+			z-index: 2
 			top: 0
 			left: 0
 			width: 100%
@@ -123,16 +135,13 @@ canvas
 		&:before
 			content: 'amata'
 			position: absolute
-			z-index: 2
+			z-index: 3
 			top: 0
 			left: 0
 			width: 100%
 			height: 100%
 			overflow: visible
 			color: rgba(256,256,256,1)
-			background: linear-gradient(to bottom, $white 60%, $grey 65%)
-			background-clip: text
-			-webkit-text-fill-color: transparent
 			font-family: sans-serif
 			font-size: 50px
 			font-weight: 900
@@ -159,7 +168,8 @@ canvas
 		width: 100px
 		height: 100px
 		overflow: visible
-		perspective: 400px
+		perspective-origin: center
+		perspective: 1000px
 
 		background-image: url(../img/Crop.png)
 		background-size: 100%
